@@ -9,10 +9,11 @@ import (
 func main() {
 	mux := defaultMux()
 
-	// Build the MapHandler using the mux as the fallback
+	// // Build the MapHandler using the mux as the fallback
 	pathsToUrls := map[string]string{
 		"/urlshort-godoc": "https://godoc.org/github.com/gophercises/urlshort",
 		"/yaml-godoc":     "https://godoc.org/gopkg.in/yaml.v2",
+		"/car":            "https://www.sauto.cz/",
 	}
 	mapHandler := urlshort.MapHandler(pathsToUrls, mux)
 
@@ -28,7 +29,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("Starting the server on :8080")
+	http.HandleFunc("/", hello)
 	http.ListenAndServe(":8080", yamlHandler)
 }
 
